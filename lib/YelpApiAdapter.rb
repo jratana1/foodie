@@ -22,15 +22,15 @@
 require "json"
 require "http"
 require "optparse"
-
+API_HOST = "https://api.yelp.com"
+SEARCH_PATH = "/v3/businesses/search"
+BUSINESS_PATH = "/v3/businesses/"
+SEARCH_LIMIT = 50
 API_KEY = "w6qa8__4fH9T6fuiTpxA09hBfrKhosMvhe9N4EVtpZ6GaqJpTTasxnDkgApBCtGUGbiO9VinV1x4nU9VhVeMLepRZa1CZdHpK-o33NtvPj2LsFag44iGgPMqkx6eX3Yx"
 
 class YelpApiAdapter
     # #Returns a parsed json object of the request
-    API_HOST = "https://api.yelp.com"
-    SEARCH_PATH = "/v3/businesses/search"
-    BUSINESS_PATH = "/v3/businesses/"
-    SEARCH_LIMIT = 30
+
     
     def self.search(location, categories = "restaurants")
       url = "#{API_HOST}#{SEARCH_PATH}"

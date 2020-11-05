@@ -19,24 +19,32 @@
         make_restaurants(location, category)
         add_attributes
         add_reviews
+        #Create photos from restaurant and make association
+        Restaurant.create_photos_restaurants
+        Photo.add_restaurants_by_id
        
         input = nil
-        
+   
         while input != "exit"          
-            rand_rest = rand(30)
+            #need to change from drawing a random rest and then pulling a random photo from that rest
+            #to a rand. number that will pull a random photo Photo.all[rand(Photo.all.length)]  
+            rand_rest = rand(SEARCH_LIMIT)
             rand_photo = rand(3)
             
-            #need to remove restaurants without photos
+            #open the random photo that was pulled
             open_image(Restaurant.all[rand_rest].photos[rand_photo])
             
+            #THE SWIPE
             puts "type left or right or reset or exit"
             puts "left : meh"
             puts "right : nom nom nom"
             puts "reset : change location and categories"
             puts "exit : thank you come again"
             puts "----------------------".colorize(:green)
+            
             input = gets.strip
 
+            #if left, pull another random photo.  If right, then use photo.id to pull rest from id
             if input == "right"
                 puts "You want to eat at #{Restaurant.all[rand_rest].name}!!!"
                 puts "----------------------".colorize(:green)
@@ -47,12 +55,24 @@
                 puts "  rating:".colorize(:light_blue) + " #{Restaurant.all[rand_rest].rating} stars / 5 stars"
                 puts "  review:".colorize(:light_blue) + " #{Restaurant.all[rand_rest].reviews[0]["text"]}"
                 puts "----------------------".colorize(:green)
+                puts "Hit Enter to Keep Swiping"
+                
+                gets.strip
             elsif input == "exit"
                 exit(0)
             elsif input == "reset"
                 puts "----------------------".colorize(:green)
                 Restaurant.clear
                 self.call
+            elsif input == "more"
+                #need to use offset to call another 50 results
+            elsif input == "left"
+                puts "Check this out!"
+            else
+                puts "I don't understand."
+                #how to ask for input again?
+                #need to def a method swipe that starts at the swipe
+                #call Swipe recursively
             end
         end
 

@@ -1,5 +1,4 @@
 class Restaurant
-    # attr_accessor :name, :address, :zip_code, :cuisine, :open?, :website, :img_url
 
     @@all = []
 
@@ -21,6 +20,19 @@ class Restaurant
             self.send(("#{key}="), value)
         end
         self
+    end
+
+    #make photos from url and bus_id in restaurants, clear photos attr. from rest.
+    def self.create_photos_restaurants
+        self.all.each do |restaurant| 
+            restaurant.photos.each do |url|
+                Photo.new(url, restaurant.id)
+                end
+            end
+    end
+
+    def rest_photo_objects
+        Photo.all.select {|photo| photo.restaurant == self}
     end
 
     def self.all
