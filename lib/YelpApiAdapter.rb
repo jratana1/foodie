@@ -1,24 +1,3 @@
-# require 'net/http'
-# require 'open-uri'
-# require 'json'
-
-# class GetRequester
-#     attr_accessor :url
-
-#     def initialize(url)
-#         @url = url
-#     end
-
-#     def get_response_body
-#         uri = URI.parse(self.url)
-#         response = Net::HTTP.get_response(uri)
-#         response.body
-#     end
-
-#     def parse_json
-#         JSON.parse(self.get_response_body)
-#     end
-# end
 require "json"
 require "http"
 require "optparse"
@@ -29,16 +8,15 @@ SEARCH_LIMIT = 50
 API_KEY = "w6qa8__4fH9T6fuiTpxA09hBfrKhosMvhe9N4EVtpZ6GaqJpTTasxnDkgApBCtGUGbiO9VinV1x4nU9VhVeMLepRZa1CZdHpK-o33NtvPj2LsFag44iGgPMqkx6eX3Yx"
 
 class YelpApiAdapter
-    # #Returns a parsed json object of the request
-
     
-    def self.search(location, categories = "restaurants")
+    def self.search(location, categories = "restaurants", offset = 1)
       url = "#{API_HOST}#{SEARCH_PATH}"
       params = {
         term: "food",
         categories: categories,
         location: location,
-        limit: SEARCH_LIMIT
+        limit: SEARCH_LIMIT,
+        offset: offset
       }
       response = HTTP.auth("Bearer #{API_KEY}").get(url, params: params)
       response.parse["businesses"]

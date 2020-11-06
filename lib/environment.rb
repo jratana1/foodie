@@ -3,6 +3,7 @@ require_relative 'foodie/cli'
 require_relative 'YelpApiAdapter'
 require_relative 'restaurant'
 require_relative 'photo'
+require_relative 'user'
 require "Launchy"
 require 'colorize'
 require 'pry'

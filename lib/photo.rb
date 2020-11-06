@@ -1,5 +1,5 @@
 class Photo
-    attr_accessor :url, :restaurant, :rest_id
+    attr_accessor :url, :restaurant, :rest_id, :lefts, :rights
     # attr_reader :restaurant, :id
     @@all = []
 
@@ -11,6 +11,8 @@ class Photo
     def initialize (url, rest_id = nil)
         @url = url
         @rest_id = rest_id
+        @lefts = 0
+        @rights = 0
         @@all << self
     end
      
@@ -26,7 +28,14 @@ class Photo
         Restaurant.all.select {|restaurant| restaurant.id == self.rest_id}
     end
 
-    #swipe_counter
-    #
-    #end
+    def swipe_left
+        self.lefts += 1
+    end
+
+    def swipe_right
+        self.rights += 1
+    end
+
+    def select_photos_by_restaurant_location
+    end
 end
