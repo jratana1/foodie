@@ -3,7 +3,7 @@
     def call
         puts "Welcome, tell me your name."
         name = gets.strip
-        User.new(name)
+        user = User.new(name)
         puts "Hi, #{name}!  What would you like to eat?"
         
         offset = 1
@@ -86,6 +86,7 @@
 
         if input == "right"
             rand_photo.swipe_right
+            user.restaurants << rand_rest
             puts "You want to eat at #{rand_rest.name}!!!"
             puts "----------------------".colorize(:green)
             puts "#{rand_rest.name}".colorize(:blue)
