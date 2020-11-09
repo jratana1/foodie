@@ -15,10 +15,10 @@
         while input != "exit"                             
             #need to pull photo by photo.restaurant.city  or zipcode == location
             rand_photo = Photo.all[rand(Photo.all.length)]
-            rand_rest = rand_photo.restaurant
+            # rand_rest = rand_photo.restaurant
 
             open_image(rand_photo.url)
-            swipe(rand_rest, rand_photo, location, category, offset)
+            swipe(user, rand_photo, location, category, offset)
         end
 
     end
@@ -27,7 +27,6 @@
         Launchy.open(url)
     end
 
-    #generate restaurants
     def make_restaurants(location, category, offset = 1)
             restaurants_array = YelpApiAdapter.search(location, category, offset)
             Restaurant.create_from_collection(restaurants_array)
@@ -53,6 +52,7 @@
         make_restaurants(location, category, offset)
         add_attributes
         add_reviews
+    
         Restaurant.create_photos_restaurants
         Photo.add_restaurants_by_id
     end
@@ -73,7 +73,8 @@
         category
     end
 
-    def swipe(rand_rest, rand_photo, location, category, offset)
+    def swipe(user, rand_photo, location, category, offset)
+        rand_rest = rand_photo.restaurant
         puts "type left or right or reset or exit"
         puts "left  : Meh..."
         puts "right : Nom nom nom!!!"
@@ -85,26 +86,35 @@
         input = gets.strip
 
         if input == "right"
-            rand_photo.swipe_right
-            user.restaurants << rand_rest
+            rand_photo.swipe_right(user)
+            
             puts "You want to eat at #{rand_rest.name}!!!"
             puts "----------------------".colorize(:green)
             puts "#{rand_rest.name}".colorize(:blue)
             puts "  location:".colorize(:light_blue) + " #{rand_rest.location["display_address"][0]}"
             puts "            #{rand_rest.location["display_address"][1]}"
             puts "  telephone:".colorize(:light_blue) + " #{rand_rest.display_phone}"
-            puts "  rating:".colorize(:light_blue) + " #{rand_rest.rating} stars / 5 stars"
+            puts "  rating:".colorize(:light_blue) + " #{rand_rest.rating} stars / 5 stars with #{rand_rest.review_count} reviews"
             puts "  review:".colorize(:light_blue) + " #{rand_rest.reviews[0]["text"]}"
             puts "----------------------".colorize(:green)
             puts "Hit Enter to Keep Swiping"
             gets.strip
-        elsif input == "exit"
-            puts "----------------------".colorize(:green)
-            puts "See you later...user data like restaurants liked" 
+        elsif input == "exit"          
+            user.restaurants.each do |restaurant|
+                puts "----------------------".colorize(:green)
+                puts "#{restaurant.name}".colorize(:blue)
+                puts "  location:".colorize(:light_blue) + " #{restaurant.location["display_address"][0]}"
+                puts "            #{restaurant.location["display_address"][1]}"
+                puts "  telephone:".colorize(:light_blue) + " #{restaurant.display_phone}"
+                puts "----------------------".colorize(:green)
+                end
+            puts "See you later!" 
             binding.pry
             exit(0)
         elsif input == "reset"
             puts "----------------------".colorize(:green)
+            #want to be able to reset without clearing restaurants, 
+            #need to call a photo by city and category and then random so I can keep all photos and restaurants
             Restaurant.clear
             offset = 1
             location = ask_for_location

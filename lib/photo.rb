@@ -1,5 +1,5 @@
 class Photo
-    attr_accessor :url, :restaurant, :rest_id, :lefts, :rights
+    attr_accessor :url, :restaurant, :rest_id, :lefts, :rights, :users
     # attr_reader :restaurant, :id
     @@all = []
 
@@ -32,8 +32,10 @@ class Photo
         self.lefts += 1
     end
 
-    def swipe_right
+    def swipe_right(user)
         self.rights += 1
+        self.users = user
+        # User.all[0].restaurants << rand_rest
     end
 
     def select_photos_by_restaurant_location

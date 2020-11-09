@@ -5,11 +5,14 @@ class User
 
     def initialize (name)
         @name = name
-        @restaurants = []
-        @photos = []
-        @lefts = 0
-        @rights = 0
         @@all << self
     end
 
+    def self.all
+        @@all
+    end
+
+    def restaurants
+        Photo.all.select{|photo| photo.users == self}.map{|photo| photo.restaurant}.uniq
+    end
 end

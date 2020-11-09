@@ -25,10 +25,12 @@ class Restaurant
     #make photos from url and bus_id in restaurants, clear photos attr. from rest.
     def self.create_photos_restaurants
         self.all.each do |restaurant| 
+            if restaurant.photos.each != nil
             restaurant.photos.each do |url|
                 Photo.new(url, restaurant.id)
                 end
             end
+        end
     end
 
     def rest_photo_objects
