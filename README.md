@@ -1,8 +1,6 @@
 # Foodie
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/foodie`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/foodie`. To experiment with that code, run `bin/foodswiper` for an interactive prompt.
 
 ## Installation
 
@@ -22,11 +20,11 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+FoodSwiper is the tinder of eating.  No more reading and seraching throguh dozens of restaurants to decide what to eat.  Let your eyes and stomach speak for themselves.  You can swipes hundreds of photos from restaurants in your neighborhood or city in minutes.  See what you crave before you even know it.  All your swipes are saved and you can view them anytime.  
 
 ## Development
 
-After checking out the repo, run `bin/setup` to install dependencies. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+After checking out the repo, run `bin/setup` to install dependencies. 
 
 To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
 

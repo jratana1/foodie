@@ -15,7 +15,6 @@
         while input != "exit"                             
             #need to pull photo by photo.restaurant.city  or zipcode == location
             rand_photo = Photo.all[rand(Photo.all.length)]
-            # rand_rest = rand_photo.restaurant
 
             open_image(rand_photo.url)
             swipe(user, rand_photo, location, category, offset)
@@ -80,12 +79,13 @@
         puts "right : Nom nom nom!!!"
         puts "reset : Change location and categories"
         puts "more  : I want more!!!!"
+        puts "show  : Let me see what I got."
         puts "exit  : Thank you come again"
         puts "----------------------".colorize(:green)
 
         input = gets.strip
-
-        if input == "right"
+        case input
+        when "right"
             rand_photo.swipe_right(user)
             
             puts "You want to eat at #{rand_rest.name}!!!"
@@ -99,7 +99,7 @@
             puts "----------------------".colorize(:green)
             puts "Hit Enter to Keep Swiping"
             gets.strip
-        elsif input == "exit"          
+        when "exit"          
             user.restaurants.each do |restaurant|
                 puts "----------------------".colorize(:green)
                 puts "#{restaurant.name}".colorize(:blue)
@@ -109,9 +109,9 @@
                 puts "----------------------".colorize(:green)
                 end
             puts "See you later!" 
-            binding.pry
+            
             exit(0)
-        elsif input == "reset"
+        when "reset"
             puts "----------------------".colorize(:green)
             #want to be able to reset without clearing restaurants, 
             #need to call a photo by city and category and then random so I can keep all photos and restaurants
@@ -120,13 +120,22 @@
             location = ask_for_location
             category = ask_for_category
             pull_rest_and_photos(location, category, offset)
-        elsif input == "more"
+        when "more"
             offset += 50
             pull_rest_and_photos(location, category, offset)
-        elsif input == "left"
+        when "left"
             rand_photo.swipe_left
             puts "----------------------".colorize(:green)
             puts "Check this out instead!"
+        when "show"
+            user.restaurants.each do |restaurant|
+                puts "----------------------".colorize(:green)
+                puts "#{restaurant.name}".colorize(:blue)
+                puts "  location:".colorize(:light_blue) + " #{restaurant.location["display_address"][0]}"
+                puts "            #{restaurant.location["display_address"][1]}"
+                puts "  telephone:".colorize(:light_blue) + " #{restaurant.display_phone}"
+                puts "----------------------".colorize(:green)
+                end
         else
             puts "----------------------".colorize(:green)
             puts "I don't understand."
