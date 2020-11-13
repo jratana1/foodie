@@ -44,4 +44,8 @@ class Restaurant
     def self.clear
         @@all = []
     end
+
+    def self.top_five_by_zip(zipcode)
+        self.all.select{|restaurant| restaurant.location["zip_code"] == zipcode}.sort_by{|restaurant| restaurant.rating}.reverse.take(5)
+    end
 end
