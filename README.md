@@ -20,7 +20,7 @@ Or install it yourself as:
 
 ## Usage
 
-FoodSwiper is the tinder of eating.  No more reading and seraching throguh dozens of restaurants to decide what to eat.  Let your eyes and stomach speak for themselves.  You can swipes hundreds of photos from restaurants in your neighborhood or city in minutes.  See what you crave before you even know it.  All your swipes are saved and you can view them anytime.  
+FoodSwiper is the tinder of eating.  No more reading and searching through dozens of restaurants to decide what to eat.  Let your eyes and stomach speak for themselves.  You can swipes hundreds of photos from restaurants in your neighborhood or city in minutes.  See what you crave before you even know it.  All your swipes are saved and you can view them anytime.  
 
 ## Development
 
